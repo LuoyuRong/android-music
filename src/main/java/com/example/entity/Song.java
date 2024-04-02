@@ -1,13 +1,36 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class Song {
+    /**
+     * 歌曲id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
-    private String singer;
+    /**
+     * 歌手id
+     */
+    private Integer singerId;
+    /**
+     * 歌曲名
+     */
+    @TableField(value = "name")
     private String songName;
-    private String pic; // 图片地址
-    private String lyric; //作曲
-    private String url; //歌曲地址
+    /**
+     * 歌曲图片相对路径
+     */
+    private String pic;
+    /**
+     * 歌词
+     */
+    private String lyric;
+    /**
+     * 歌曲相对地址
+     */
+    private String url;
 }
