@@ -1,0 +1,21 @@
+spring:
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/music?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: 123456
+server:
+  port: 8080
+mybatis-plus:
+  # 类型别名包路径
+  type-aliases-package: com.example.entity
+  configuration:
+    # 自动映射时出现不可映射的列 - warning(输出警告日志)
+    auto-mapping-unknown-column-behavior: warning
+    # 自动映射时下划线格式自动转换为驼峰格式
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    # 打印SQL日志
+    com.example.mapper: debug
