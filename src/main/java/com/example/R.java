@@ -33,9 +33,9 @@ public class R {
         return r;
     }
 
-    public static R success(String message) {
+    public static R success(Object obj) {
         R r = new R();
-        r.setMessage(message);
+        r.setData(obj);
         r.setSuccess(true);
         r.setCode(200);
         return r;

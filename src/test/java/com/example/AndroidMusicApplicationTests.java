@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.HttpRequestUtils;
 import com.example.entity.User;
 import com.example.service.UserService;
 import jakarta.annotation.Resource;
