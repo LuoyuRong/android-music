@@ -12,6 +12,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -38,10 +39,22 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         return R.success(Boolean.FALSE, "已取消收藏");
     }
 
+    /**
+     * 查询用户收藏的歌曲
+     *
+     * @param userId 用户id
+     * @return 歌曲list
+     */
     @Override
     public List<Song> queryCollectSong(Long userId) {
-        List<Collect> ids = list(new QueryWrapper<Collect>().eq("user_id", userId));
+        log.info("入参-userId={}", userId);
+        List<Collect> ids = list(new QueryWrapper<Collect>().eq("user_id", userId).orderByDesc("create_time"));
+        // 获取歌曲id集合
         List<Long> songIds = ids.stream().map(Collect::getSongId).toList();
+        if (songIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        log.info("收藏歌曲的ids={}", songIds);
         return songMapper.selectList(new QueryWrapper<Song>().in("id", songIds));
     }
 }

@@ -16,6 +16,9 @@ public class R {
      * 响应的数据
      */
     private Object data;
+    /**
+     * 响应的消息
+     */
     private String message;
 
     /**
