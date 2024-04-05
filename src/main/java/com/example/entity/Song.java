@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Song {
     /**
@@ -33,4 +35,6 @@ public class Song {
      * 歌曲相对地址
      */
     private String url;
+
+    private Date createTime;
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SongMapper">
+    <select id="queryCollectSong" resultType="com.example.entity.Song">
+        select s.id, s.singer_id, s.name AS songName, s.pic, s.url, c.create_time from song as s LEFT JOIN collect as c
+        ON s.id = c.song_id where s.id IN <foreach item='item' collection='ids'
+                                                   open='(' separator=','
+                                                   close=')'>#{item}
+    </foreach> ORDER BY c.create_time DESC
+    </select>
+</mapper>

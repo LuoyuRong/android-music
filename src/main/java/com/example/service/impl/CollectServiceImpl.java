@@ -55,6 +55,6 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
             return new ArrayList<>();
         }
         log.info("收藏歌曲的ids={}", songIds);
-        return songMapper.selectList(new QueryWrapper<Song>().in("id", songIds));
+        return songMapper.queryCollectSong(songIds);
     }
 }
