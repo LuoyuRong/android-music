@@ -3,9 +3,12 @@ package com.example.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.R;
+import com.example.entity.Collect;
 import com.example.entity.User;
+import com.example.mapper.CollectMapper;
 import com.example.mapper.UserMapper;
 import com.example.service.UserService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Service;
@@ -15,7 +18,8 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
+    @Resource
+    private CollectMapper collectMapper;
 
     @Override
     public R userRegister(User user) {
@@ -55,5 +59,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return R.error("登录失败! 密码输入错误!");
         }
         return R.success(user, "登录成功!");
+    }
+
+    @Override
+    public R logoffRequest(Long userId) {
+        // 删除用户相关数据
+        collectMapper.delete(new QueryWrapper<Collect>().eq("user_id", userId));
+        return R.success(baseMapper.deleteById(userId), "注销成功!");
     }
 }

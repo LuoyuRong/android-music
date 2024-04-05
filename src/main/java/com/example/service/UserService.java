@@ -8,4 +8,6 @@ public interface UserService extends IService<User> {
     R userRegister(User user);
 
     R loginRequest(String account, String password);
+
+    R logoffRequest(Long userId);
 }
