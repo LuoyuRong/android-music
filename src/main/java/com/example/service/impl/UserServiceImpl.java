@@ -21,6 +21,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private CollectMapper collectMapper;
 
+    /**
+     * 注册用户，注册成功返回用户信息。
+     *
+     * @param user 用户对象
+     * @return R
+     */
     @Override
     public R userRegister(User user) {
         user.setCreatedTime(DateFormatUtils.format(System.currentTimeMillis(), "yyyy-MM-dd HH:mm:ss"));
@@ -28,7 +34,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         R r = new R();
         try {
             save(user);
+            User result = baseMapper.selectOne(new QueryWrapper<User>().eq("username", user.getUsername()));
+            log.info("result user = {}", result);
             r.setSuccess(true);
+            r.setData(result);
             r.setMessage("恭喜你,注册成功!");
             r.setCode(200);
         } catch (Exception e) {

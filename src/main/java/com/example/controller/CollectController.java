@@ -29,12 +29,6 @@ public class CollectController {
 
     }
 
-    /**
-     * 判断歌曲是否已收藏
-     *
-     * @param collect 收藏信息
-     * @return R
-     */
     @PostMapping("/collect/judge")
     public R judgeIsCollect(@RequestBody Collect collect) {
         return collectService.judgeCollect(collect);

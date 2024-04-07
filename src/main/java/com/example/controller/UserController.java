@@ -41,4 +41,9 @@ public class UserController {
     public R logoff(@RequestParam("id") Long userId) {
         return userService.logoffRequest(userId);
     }
+
+    @PostMapping("/update")
+    public R update(@RequestBody User user) {
+        return R.success(userService.updateById(user), "保存成功");
+    }
 }
